@@ -1,19 +1,17 @@
 <template>
-  <router-view></router-view>
+    <p>Página User</p>
 </template>
-
+  
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'App'
+    name: 'PageUser'
 });
 </script>
 
-<style>
-body{
-  font-size: 25px;
-}
+
+<style scoped>
 
 </style>
