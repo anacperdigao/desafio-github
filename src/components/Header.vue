@@ -2,7 +2,7 @@
     <header class="header">
         <h1><strong>Github</strong> <em>Search</em></h1>
         <div class="lista-header">
-            <router-link to="/"><p class="inicio">INÍCIO</p></router-link>
+            <p @click="voltarInicio" class="inicio">INÍCIO</p>
             <p class="favoritos">FAVORITOS</p>
         </div>
     </header>
@@ -13,7 +13,17 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'Header' //eslint-disable-line
+    name: 'HeaderComponent',
+
+    emits: ['aoSelecionarInicio'],
+
+    methods: {
+        voltarInicio () {
+            this.$emit('aoSelecionarInicio', {
+                setPages: 'Home'
+            })
+        }
+    }
 });
 </script>
 

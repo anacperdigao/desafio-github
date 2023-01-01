@@ -1,4 +1,5 @@
 <template>
+
     <div class="home">
         <img class="logo" src="../assets/Vector.png" alt="Logo GitHub">
         <div class="botoes">
@@ -10,6 +11,7 @@
     </div>
 
     <Modal v-if="showModal" :showModal="showModal" @aoFecharModal="closeModal" />
+
 </template>
   
 
@@ -28,14 +30,14 @@ export default defineComponent({
             dadosRepositorio: [],
             dadosUsuario: {},
             showModal: false,
-            showRepository: false,
-            showUser: false,
         }
     },
 
     components: {
         Modal
     },
+
+    emits: ['aoRepoSelecionado', 'aoUsuarioSelecionado'],
 
     methods: {
 
@@ -48,7 +50,10 @@ export default defineComponent({
             .get(`https://api.github.com/users/${this.textoBusca}/repos`)
             .then((response: any) => {
                 this.dadosRepositorio = response.data
-                this.showRepository = true
+                this.$emit('aoRepoSelecionado', {
+                setPages: 'Repository',
+                dadosRepositorio: this.dadosRepositorio
+            })
             })
             .catch((erro) => {
                 if (erro.response.status === 404) {
@@ -62,7 +67,10 @@ export default defineComponent({
             .get(`https://api.github.com/users/${this.textoBusca}`)
             .then((response: any) => {
                 this.dadosUsuario = response.data
-                this.showUser = true
+                this.$emit('aoUsuarioSelecionado', {
+                    setPages: 'User',
+                    dadosUsuario: this.dadosUsuario
+                })
             })
             .catch((erro) => {
                 if (erro.response.status === 404) {

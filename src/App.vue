@@ -1,11 +1,24 @@
 <template>
+  
+    <Header @aoSelecionarInicio="inicioSelecionado"></Header>
 
-  <Header></Header>
+    <Home 
+      v-if="setPages === 'Home'" 
+      @aoRepoSelecionado="repoSelecionado" 
+      @aoUsuarioSelecionado="usuarioSelecionado"
+    />
+    
+    <User 
+      v-if="setPages === 'User'"
+      :dadosUsuario = "dadosUsuario"
+    />
 
-  <Home v-if="setPages === 'Home'"/>
-  <User v-if="setPages === 'User'"/>
-  <Repository v-if="setPages === 'Repository'"/>
-  <Favorites v-if="setPages === 'Favorites'"/>
+    <Repository 
+      v-if="setPages === 'Repository'" 
+      :dadosRepositorio = "dadosRepositorio"
+    />
+
+    <Favorites v-if="setPages === 'Favorites'"/>
 
 </template>
 
@@ -23,7 +36,9 @@ export default defineComponent({
 
   data () {
     return {
-      setPages: 'Home'
+      setPages: 'Home',
+      dadosUsuario: [],
+      dadosRepositorio: []
     }
   },
 
@@ -34,6 +49,22 @@ export default defineComponent({
     Repository,
     Favorites
   },
+
+  methods: {
+    usuarioSelecionado(dados: any) {
+      this.setPages = dados.setPages
+      this.dadosUsuario = dados.dadosUsuario
+    },
+
+    repoSelecionado(dados: any) {
+      this.setPages = dados.setPages
+      this.dadosRepositorio = dados.dadosRepositorio
+    },
+
+    inicioSelecionado(dados: any){
+      this.setPages = dados.setPages
+    }
+  }
 
 });
 </script>
