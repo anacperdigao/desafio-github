@@ -11,17 +11,16 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'PageRepository',
 
-    // data () {
-    //     return {
-    //         route: useRoute(),
-    //         nomeUsuario: "",
-    //     }
-    // },
+    props: {
+        dadosRepositorio: {
+            type: Array
+        }
+    },
 
-    // created () {
-    //     this.nomeUsuario = this.$route.query.nomeUsuario
-    //     console.log(this.nomeUsuario)
-    // }
+    created () {
+        console.log(this.dadosRepositorio)
+    }
+    
 });
 </script>
 
