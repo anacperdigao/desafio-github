@@ -17,10 +17,17 @@ export default defineComponent({
         }
     },
 
+    data() {
+        return{
+            dadosApi: [] as any
+        }
+    },
+
     created () {
-        console.log(this.dadosRepositorio)
+        this.dadosApi = this.dadosRepositorio
+        console.log(this.dadosApi)
     }
-    
+
 });
 </script>
 

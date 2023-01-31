@@ -2,9 +2,9 @@
 
     <div class="home">
         <img class="logo" src="../assets/Vector.png" alt="Logo GitHub">
-        <div class="botoes">
-            <button @click="repoSelecionado" class="botao">Repositório</button>
-            <button @click="usuarioSelecionado" class="botao">Usuário</button>
+        <div class="buttons">
+            <button @click="repoSelecionado" class="button">Repositório</button>
+            <button @click="usuarioSelecionado" class="button">Usuário</button>
         </div>
         
         <input @keydown.enter="teste" class="input" type="text" placeholder="Buscar..." v-model="textoBusca" >
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Modal from './Modal.vue'
+import Modal from '../components/Modal.vue'
 import axios from 'axios'
 
 
@@ -37,15 +37,13 @@ export default defineComponent({
         Modal
     },
 
-    emits: ['aoRepoSelecionado', 'aoUsuarioSelecionado'],
-
     methods: {
 
         teste () {
             console.log('entrei')
         },
 
-        repoSelecionado(evento: any) {
+        repoSelecionado() {
             axios
             .get(`https://api.github.com/users/${this.textoBusca}/repos`)
             .then((response: any) => {
@@ -62,7 +60,7 @@ export default defineComponent({
             })
         },
 
-        usuarioSelecionado(evento: any) {
+        usuarioSelecionado() {
             axios
             .get(`https://api.github.com/users/${this.textoBusca}`)
             .then((response: any) => {
@@ -104,13 +102,13 @@ export default defineComponent({
     margin-top: 50px;
 }
 
-.botoes{
+.buttons{
     display: flex;
     flex-direction: row;
     gap: 30px
 }
 
-.botao{
+.button{
     width: 186px;
     height: 51px;
     border-radius: 5px;
@@ -120,7 +118,7 @@ export default defineComponent({
     cursor: pointer;
 }
 
-.botao:hover{
+.button:hover{
     transform: scale(1.03);
 }
 

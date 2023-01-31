@@ -1,16 +1,22 @@
 <template>
-    <p>Página User</p>
+    <Card :dadosApi="dadosApi" />
 
 </template>
   
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
+import Card from './Card.vue'
 
 
 export default defineComponent({
     name: 'PageUser',
+
+    data() {
+        return{
+            dadosApi: [] as any
+        }
+    },
 
     props: {
         dadosUsuario: {
@@ -19,7 +25,12 @@ export default defineComponent({
     },
 
     created () {
-        console.log(this.dadosUsuario)
+        this.dadosApi = this.dadosUsuario
+        console.log(this.dadosApi)
+    },
+
+    components: {
+        Card
     }
     
 });

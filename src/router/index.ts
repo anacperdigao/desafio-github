@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 const routes = [
-    // {
-    //     path: '/',
-    //     name: 'Home',
-    //     component: () => import('../components/Home.vue') 
-    // },
+    {
+        path: '/',
+        name: 'Home',
+        component: () => import('../views/Home.vue') 
+    },
     // {
     //     path: '/user',
     //     name: 'User',
@@ -22,11 +22,11 @@ const routes = [
     //     name: 'Favorites',
     //     component: () => import('../views/Favorites.vue')        
     // },
-    {
-        path: '/:catchAll(.*)',
-        name: 'PageNotFound',
-        component: () => import('../views/PageNotFound.vue')        
-    },
+    // {
+    //     path: '/:catchAll(.*)',
+    //     name: 'PageNotFound',
+    //     component: () => import('../views/PageNotFound.vue')        
+    // },
 ]
 
 const router = createRouter({
