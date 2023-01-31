@@ -28,6 +28,7 @@ export default defineComponent({
   text-decoration: none;
   font-family: 'Inter';
   box-sizing: border-box;
+  user-select: none;
 }
 
 

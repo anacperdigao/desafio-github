@@ -19,16 +19,19 @@ export default defineComponent({
     name: 'ModalComponent',
 
     props: {
-        showModal: {
-            type: Boolean
+        showModal: { type: Boolean }
+    },
+
+    data () {
+        return{
+            showModalProps: this.showModal
         }
     },
 
-    emits: ['aoFecharModal'],
-
     methods: {
         closeModal (): void {
-            this.$emit('aoFecharModal')
+            this.showModalProps = false
+            this.$emit('aoFecharModal', this.showModalProps)
         }
     },
 });

@@ -2,15 +2,17 @@
 
     <div class="home">
         <img class="logo" src="../assets/Vector.png" alt="Logo GitHub">
+        <input class="input" type="text" placeholder="Buscar..." v-model="textoBusca" >
+        
         <div class="buttons">
-            <button @click="repoSelecionado" class="button">Repositório</button>
-            <button @click="usuarioSelecionado" class="button">Usuário</button>
+            <button @click="handleRepositories" class="button">Repositório</button>
+            <button @click="handleUsers" class="button">Usuário</button>
         </div>
         
-        <input @keydown.enter="teste" class="input" type="text" placeholder="Buscar..." v-model="textoBusca" >
+
     </div>
 
-    <Modal v-if="showModal" :showModal="showModal" @aoFecharModal="closeModal" />
+    <Modal v-if="showModal" :showModal="showModal" @aoFecharModal="showModal = $event" />
 
 </template>
   
@@ -26,10 +28,12 @@ export default defineComponent({
 
     data () {
         return {
+            showModal: false,
             textoBusca: "",
+            
             dadosRepositorio: [],
             dadosUsuario: {},
-            showModal: false,
+            isSelected: false,
         }
     },
 
@@ -39,11 +43,7 @@ export default defineComponent({
 
     methods: {
 
-        teste () {
-            console.log('entrei')
-        },
-
-        repoSelecionado() {
+        handleRepositories() {
             axios
             .get(`https://api.github.com/users/${this.textoBusca}/repos`)
             .then((response: any) => {
@@ -60,7 +60,7 @@ export default defineComponent({
             })
         },
 
-        usuarioSelecionado() {
+        handleUsers() {
             axios
             .get(`https://api.github.com/users/${this.textoBusca}`)
             .then((response: any) => {
@@ -77,9 +77,6 @@ export default defineComponent({
             })
         },
 
-        closeModal () {
-            this.showModal = false
-        }
 
     }
 });
@@ -122,21 +119,16 @@ export default defineComponent({
     transform: scale(1.03);
 }
 
-.is-black{
-    background-color: black;
-    color: white;
-}
-
 .input{
-    width: 780px;
-    height: 71px;
+    width: 600px;
+    height: 50px;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 20px;
     padding-left: 20px;
 }
 
 .input::placeholder{
-    font-size: 24px;
+    font-size: 20px;
 }
 
 </style>
