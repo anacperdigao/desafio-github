@@ -2,7 +2,7 @@
 
     <div class="home">
         <img class="logo" src="../assets/Vector.png" alt="Logo GitHub">
-        <input class="input" type="text" placeholder="Buscar..." v-model="textoBusca" >
+        <input class="input" type="text" placeholder="Buscar..." v-model="inputData" >
         
         <div class="buttons">
             <button @click="handleRepositories" class="button">Repositórios</button>
@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Modal from '../components/Modal.vue'
-import api from '../api/api'
+import api from '../services/api'
 
 export default defineComponent({
     name: 'PageHome',
@@ -26,11 +26,10 @@ export default defineComponent({
     data () {
         return {
             showModal: false,
-            textoBusca: "",
+            inputData: "",
             
-            dadosRepositorio: [],
-            dadosUsuario: {},
-            isSelected: false,
+            repositoriesData: [],
+            usersData: [],
         }
     },
 
@@ -39,33 +38,13 @@ export default defineComponent({
     },
 
     methods: {
-
-        handleRepositories() {
-            api
-            .get(`/users/${this.textoBusca}/repos`)
-            .then((response: any) => {
-                this.dadosRepositorio = response.data
-                this.$emit('aoRepoSelecionado', {
-                setPages: 'Repository',
-                dadosRepositorio: this.dadosRepositorio
-            })
-            })
-            .catch((erro) => {
-                if (erro.response.status === 404) {
-                    this.showModal = true
-                }
-            })
-        },
-
+        
         handleUsers() {
             api
-            .get(`/users/${this.textoBusca}`)
-            .then((response: any) => {
-                this.dadosUsuario = response.data
-                this.$emit('aoUsuarioSelecionado', {
-                    setPages: 'User',
-                    dadosUsuario: this.dadosUsuario
-                })
+            .get(`/search/users?q=${this.inputData}&page=${1}`)
+            .then((response) => {
+                this.usersData = response.data
+                console.log(this.usersData)
             })
             .catch((erro) => {
                 if (erro.response.status === 404) {
@@ -73,8 +52,20 @@ export default defineComponent({
                 }
             })
         },
-
-
+        
+        handleRepositories() {
+            api
+            .get(`/search/repositories?q=${this.inputData}&page=${1}`)
+            .then((response) => {
+                this.repositoriesData = response.data
+                console.log(this.repositoriesData)
+            })
+            .catch((erro) => {
+                if (erro.response.status === 404) {
+                    this.showModal = true
+                }
+            })
+        },
     }
 });
 
