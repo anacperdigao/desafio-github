@@ -5,11 +5,9 @@
         <input class="input" type="text" placeholder="Buscar..." v-model="textoBusca" >
         
         <div class="buttons">
-            <button @click="handleRepositories" class="button">Repositório</button>
-            <button @click="handleUsers" class="button">Usuário</button>
+            <button @click="handleRepositories" class="button">Repositórios</button>
+            <button @click="handleUsers" class="button">Usuários</button>
         </div>
-        
-
     </div>
 
     <Modal v-if="showModal" :showModal="showModal" @aoFecharModal="showModal = $event" />
@@ -20,8 +18,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Modal from '../components/Modal.vue'
-import axios from 'axios'
-
+import api from '../api/api'
 
 export default defineComponent({
     name: 'PageHome',
@@ -44,8 +41,8 @@ export default defineComponent({
     methods: {
 
         handleRepositories() {
-            axios
-            .get(`https://api.github.com/users/${this.textoBusca}/repos`)
+            api
+            .get(`/users/${this.textoBusca}/repos`)
             .then((response: any) => {
                 this.dadosRepositorio = response.data
                 this.$emit('aoRepoSelecionado', {
@@ -61,8 +58,8 @@ export default defineComponent({
         },
 
         handleUsers() {
-            axios
-            .get(`https://api.github.com/users/${this.textoBusca}`)
+            api
+            .get(`/users/${this.textoBusca}`)
             .then((response: any) => {
                 this.dadosUsuario = response.data
                 this.$emit('aoUsuarioSelecionado', {
@@ -80,7 +77,6 @@ export default defineComponent({
 
     }
 });
-
 
 </script>
 
