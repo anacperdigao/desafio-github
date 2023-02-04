@@ -27,9 +27,8 @@ export default defineComponent({
         return {
             showModal: false,
             inputData: "",
-            
-            repositoriesData: [],
-            usersData: [],
+            repositoriesData: {},
+            usersData: {},
         }
     },
 
@@ -44,10 +43,12 @@ export default defineComponent({
             .get(`/search/users?q=${this.inputData}&page=${1}`)
             .then((response) => {
                 this.usersData = response.data
-                console.log(this.usersData)
+                if ( response.data.total_count === 0 ) {
+                    this.showModal = true
+                }
             })
             .catch((erro) => {
-                if (erro.response.status === 404) {
+                if (erro.response.status === 422) {
                     this.showModal = true
                 }
             })
@@ -58,10 +59,12 @@ export default defineComponent({
             .get(`/search/repositories?q=${this.inputData}&page=${1}`)
             .then((response) => {
                 this.repositoriesData = response.data
-                console.log(this.repositoriesData)
+                if ( response.data.total_count === 0 ) {
+                    this.showModal = true
+                }
             })
             .catch((erro) => {
-                if (erro.response.status === 404) {
+                if (erro.response.status === 422) {
                     this.showModal = true
                 }
             })
