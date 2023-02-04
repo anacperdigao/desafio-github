@@ -40,11 +40,13 @@ export default defineComponent({
         
         handleUsers() {
             api
-            .get(`/search/users?q=${this.inputData}&page=${1}`)
+            .get(`/search/users?q=${this.inputData}`)
             .then((response) => {
                 this.usersData = response.data
                 if ( response.data.total_count === 0 ) {
                     this.showModal = true
+                } else {
+                    this.$router.push({ path: '/userslist' })
                 }
             })
             .catch((erro) => {
@@ -56,11 +58,13 @@ export default defineComponent({
         
         handleRepositories() {
             api
-            .get(`/search/repositories?q=${this.inputData}&page=${1}`)
+            .get(`/search/repositories?q=${this.inputData}`)
             .then((response) => {
                 this.repositoriesData = response.data
                 if ( response.data.total_count === 0 ) {
                     this.showModal = true
+                } else {
+                    this.$router.push({ path: '/usersrepositories' })
                 }
             })
             .catch((erro) => {

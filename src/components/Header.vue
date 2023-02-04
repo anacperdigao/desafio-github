@@ -2,8 +2,8 @@
     <header class="header">
         <h1><strong>Github</strong> <em>Search</em></h1>
         <div class="lista-header">
-            <p @click="voltarInicio" class="inicio">INÍCIO</p>
-            <p class="favoritos">FAVORITOS</p>
+            <p @click="handleHome" class="inicio">INÍCIO</p>
+            <p @click='handleFavorites' class="favoritos">FAVORITOS</p>
         </div>
     </header>
 </template>
@@ -11,17 +11,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
     name: 'HeaderComponent',
 
-    emits: ['aoSelecionarInicio'],
+    data () {
+        return{
+            router: useRouter()
+        }
+    },
 
     methods: {
-        voltarInicio () {
-            this.$emit('aoSelecionarInicio', {
-                setPages: 'Home'
-            })
+        handleHome () {
+            this.router.push({ path: '/' })
+        },
+
+        handleFavorites() {
+            this.router.push({ path: '/favorites' })
         }
     }
 });

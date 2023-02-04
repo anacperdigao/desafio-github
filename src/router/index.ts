@@ -7,6 +7,17 @@ const routes = [
         name: 'Home',
         component: () => import('../views/Home.vue') 
     },
+    {
+        path: '/favorites',
+        name: 'Favorites',
+        component: () => import('../views/Favorites.vue')        
+    },
+    {
+        path: '/userslist',
+        name: 'UsersList',
+        component: () => import('../views/UsersList.vue') 
+    },
+
     // {
     //     path: '/user',
     //     name: 'User',
@@ -17,11 +28,7 @@ const routes = [
     //     name: 'Repository',
     //     component: () => import('../views/Repository.vue')        
     // },
-    // {
-    //     path: '/favorites',
-    //     name: 'Favorites',
-    //     component: () => import('../views/Favorites.vue')        
-    // },
+
     // {
     //     path: '/:catchAll(.*)',
     //     name: 'PageNotFound',
