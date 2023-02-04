@@ -2,7 +2,7 @@
 
     <div class="home">
         <img class="logo" src="../assets/Vector.png" alt="Logo GitHub">
-        <input class="input" type="text" placeholder="Buscar..." v-model="inputData" >
+        <input class="input" type="text" placeholder="Buscar..." v-model="dataInput" >
         
         <div class="buttons">
             <button @click="handleRepositories" class="button">Repositórios</button>
@@ -16,7 +16,8 @@
   
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { store } from '@/store';
+import { defineComponent, computed } from 'vue';
 import Modal from '../components/Modal.vue'
 import api from '../services/api'
 
@@ -26,23 +27,42 @@ export default defineComponent({
     data () {
         return {
             showModal: false,
-            inputData: "",
-            repositoriesData: {},
-            usersData: {},
         }
     },
 
     components: {
         Modal
     },
+    
+    computed: {
+        dataInput: {
+            get () {
+                return store.state.dataInput
+            },
+            set(value: string) {
+                store.commit('setDataInput', value)
+            }
+        },
+    },
 
+    setup () {
+        return{
+            usersData: computed(() => store.state.usersData),
+            repositoriesData: computed(() => store.state.repositoriesData)
+        }
+    },
+
+    created () {
+        store.commit('clearInput', "")
+    },
+    
     methods: {
         
-        handleUsers() {
-            api
-            .get(`/search/users?q=${this.inputData}`)
+        async handleUsers() {
+            await api
+            .get(`/search/users?q=${this.dataInput}`)
             .then((response) => {
-                this.usersData = response.data
+                store.commit('setUsersData', response.data.items)
                 if ( response.data.total_count === 0 ) {
                     this.showModal = true
                 } else {
@@ -56,11 +76,11 @@ export default defineComponent({
             })
         },
         
-        handleRepositories() {
-            api
-            .get(`/search/repositories?q=${this.inputData}`)
+        async handleRepositories() {
+            await api
+            .get(`/search/repositories?q=${this.dataInput}`)
             .then((response) => {
-                this.repositoriesData = response.data
+                store.commit('setRepositoriesData', response.data.items)
                 if ( response.data.total_count === 0 ) {
                     this.showModal = true
                 } else {

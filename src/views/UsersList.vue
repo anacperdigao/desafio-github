@@ -1,17 +1,24 @@
 <template>
-    <p> Users List </p>
+    <p v-for='user in usersData' :key='user.id'> {{ user.login }} </p>
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
+import { store } from '@/store';
 
 export default defineComponent({
     name: 'PageUserList',
 
-    data() {
-        return{
-            
+    setup() {
+        return {
+            dataInput: computed(() => store.state.dataInput),
+            usersData: computed(() => store.state.usersData),
         }
+    },
+
+    created () {
+        console.log(this.dataInput)
+        console.log(this.usersData)
     }
 
 })
