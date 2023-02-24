@@ -1,13 +1,25 @@
 <template>
-    <p v-for='user in usersData' :key='user.id'> {{ user.login }} </p>
+
+    <Card 
+        v-for='user in usersData' 
+        :key='user.id'
+        :user='user'
+    >
+    </Card>
+
 </template>
 
 <script lang='ts'>
 import { defineComponent, computed } from 'vue';
 import { store } from '@/store';
+import Card from '../components/Card.vue'
 
 export default defineComponent({
     name: 'PageUserList',
+
+    components: {
+        Card
+    },
 
     setup() {
         return {

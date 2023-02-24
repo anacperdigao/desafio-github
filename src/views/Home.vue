@@ -57,9 +57,9 @@ export default defineComponent({
     },
     
     methods: {
-        
-        async handleUsers() {
-            await api
+
+        handleUsers() {
+            api
             .get(`/search/users?q=${this.dataInput}`)
             .then((response) => {
                 store.commit('setUsersData', response.data.items)
@@ -76,8 +76,8 @@ export default defineComponent({
             })
         },
         
-        async handleRepositories() {
-            await api
+        handleRepositories() {
+            api
             .get(`/search/repositories?q=${this.dataInput}`)
             .then((response) => {
                 store.commit('setRepositoriesData', response.data.items)
