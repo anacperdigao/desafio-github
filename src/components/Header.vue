@@ -1,9 +1,8 @@
 <template>
     <header class="header">
-        <h1><strong>Github</strong> <em>Search</em></h1>
+        <h1>Github Search</h1>
         <div class="lista-header">
-            <p @click="handleHome" class="inicio">INÍCIO</p>
-            <p @click='handleFavorites' class="favoritos">FAVORITOS</p>
+            <p @click="handleHome" class="inicio">Início</p>
         </div>
     </header>
 </template>
@@ -11,24 +10,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
     name: 'HeaderComponent',
 
-    data () {
-        return{
-            router: useRouter()
-        }
-    },
-
     methods: {
         handleHome () {
-            this.router.push({ path: '/' })
-        },
-
-        handleFavorites() {
-            this.router.push({ path: '/favorites' })
+            this.$router.push({ path: '/' })
         }
     }
 });
@@ -44,7 +32,6 @@ export default defineComponent({
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     color: #000000;
     padding: 0px 100px 0px 50px;
 }
@@ -53,7 +40,7 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 500;
     gap: 40px
 }
 

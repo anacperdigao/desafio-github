@@ -4,7 +4,7 @@
 
         <img src="../assets/Exclamacao.png" alt="Aviso" class="exclamacao">
         <p class="desculpe">Desculpe!</p>
-        <p class="aviso">Não foi possível encontrar o repositório ou usuário desejado!</p>
+        <p class="aviso">Não foi possível encontrar o usuário desejado.</p>
         <button class="botao-fechar" @click="closeModal">Certo</button>
         
     </dialog>
@@ -56,11 +56,11 @@ export default defineComponent({
 .dialog{
     border: none;
     border-radius: 15px;
-    width: 444px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     padding: 40px;
     margin: auto;
-    bottom: 50px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,8 +69,8 @@ export default defineComponent({
 }
 
 .exclamacao{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
 }
 
@@ -78,10 +78,10 @@ export default defineComponent({
     background-color: #FF0000;
     color: white;
     border: none;
-    width: 194px;
-    height: 72px;
+    width: 140px;
+    height: 55px;
     border-radius: 10px;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -91,11 +91,11 @@ export default defineComponent({
 }
 
 .desculpe{
-    font-size: 48px;
+    font-size: 36px;
 }
 
 .aviso{
-    font-size: 24px;
+    font-size: 20px;
 }
 
 

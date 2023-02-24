@@ -2,11 +2,10 @@
 
     <div class="home">
         <img class="logo" src="../assets/Vector.png" alt="Logo GitHub">
-        <input class="input" type="text" placeholder="Buscar..." v-model="dataInput" >
+        <input class="input" type="text" placeholder="Digite o nome do usuário..." v-model="dataInput" >
         
         <div class="buttons">
-            <button @click="handleRepositories" class="button">Repositórios</button>
-            <button @click="handleUsers" class="button">Usuários</button>
+            <button @click="handleUsers" class="button">Buscar</button>
         </div>
     </div>
 
@@ -33,7 +32,7 @@ export default defineComponent({
     components: {
         Modal
     },
-    
+
     computed: {
         dataInput: {
             get () {
@@ -48,7 +47,6 @@ export default defineComponent({
     setup () {
         return{
             usersData: computed(() => store.state.usersData),
-            repositoriesData: computed(() => store.state.repositoriesData)
         }
     },
 
@@ -74,25 +72,8 @@ export default defineComponent({
                     this.showModal = true
                 }
             })
-        },
-        
-        handleRepositories() {
-            api
-            .get(`/search/repositories?q=${this.dataInput}`)
-            .then((response) => {
-                store.commit('setRepositoriesData', response.data.items)
-                if ( response.data.total_count === 0 ) {
-                    this.showModal = true
-                } else {
-                    this.$router.push({ path: '/usersrepositories' })
-                }
-            })
-            .catch((erro) => {
-                if (erro.response.status === 422) {
-                    this.showModal = true
-                }
-            })
-        },
+        }
+
     }
 });
 

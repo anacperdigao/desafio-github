@@ -1,11 +1,13 @@
 <template>
 
-    <Card 
-        v-for='user in usersData' 
-        :key='user.id'
-        :user='user'
-    >
-    </Card>
+    <div class='cards'>
+        <Card 
+            v-for='user in usersData' 
+            :key='user.id'
+            :user='user'
+        >
+        </Card>
+    </div>
 
 </template>
 
@@ -39,4 +41,12 @@ export default defineComponent({
 
 <style scoped>
 
+.cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+}
 </style>

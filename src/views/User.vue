@@ -1,13 +1,15 @@
 <template>
-    <p>Página Favorites</p>
+    <div>Usuário selecionado</div>
 </template>
   
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+
 export default defineComponent({
-    name: 'PageFavorites'
+    name: 'PageUser',
+    
 });
 </script>
 
