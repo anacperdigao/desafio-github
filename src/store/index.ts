@@ -1,10 +1,11 @@
+import IUsersData from "@/interfaces/IUsersData";
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 
 interface Estado {
     dataInput: string,
     repositoriesData: Array<any>,
-    usersData: Array<any>,
+    usersData: Array<IUsersData>,
 }
 
 export const key: InjectionKey<Store<Estado>> = Symbol()
@@ -25,7 +26,7 @@ export const store = createStore<Estado>({
             state.dataInput = dataInput
         },
 
-        setUsersData(state, usersData: Array<any>){
+        setUsersData(state, usersData: Array<IUsersData>){
             state.usersData = usersData
         },
 
