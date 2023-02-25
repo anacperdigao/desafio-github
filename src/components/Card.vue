@@ -1,6 +1,6 @@
 <template>
     
-    <div class='card'>
+    <div class='card' @click="openModal">
         <img class='avatar' :src='user.avatar_url' />
         <div class='info'>
             <div class='login'>
@@ -24,7 +24,24 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'CardComponent',
 
-    props: ['user']
+    props: ['user', 'showModal'],
+
+    data() {
+        return{
+            showModalProps: this.showModal,
+            userSelected: this.user
+        }
+    },
+
+    methods: {
+        openModal(): void {
+            this.showModalProps = true
+            this.$emit('aoAbrirModal', {
+                showModalProps: this.showModalProps,
+                userSelected: this.userSelected
+            })
+        }
+    }
     
 });
 

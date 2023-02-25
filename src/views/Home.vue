@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <Modal v-if="showModal" :showModal="showModal" @aoFecharModal="showModal = $event" />
+    <ModalError v-if="showModal" :showModal="showModal" @aoFecharModal="showModal = $event" />
 
 </template>
   
@@ -17,7 +17,7 @@
 <script lang="ts">
 import { store } from '@/store';
 import { defineComponent, computed } from 'vue';
-import Modal from '../components/Modal.vue'
+import ModalError from '../components/ModalError.vue'
 import api from '../services/api'
 
 export default defineComponent({
@@ -30,7 +30,7 @@ export default defineComponent({
     },
 
     components: {
-        Modal
+        ModalError
     },
 
     computed: {
