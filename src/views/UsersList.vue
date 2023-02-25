@@ -5,8 +5,17 @@
             v-for='user in usersData' 
             :key='user.id'
             :user='user'
+            @aoAbrirModal="showModal = $event.showModalProps, userSelected = $event.userSelected"
         >
         </Card>
+
+        <ModalUser 
+            v-if="showModal" 
+            :showModal="showModal" 
+            @aoFecharModal="showModal = $event"
+            :userSelected="userSelected" 
+        />
+
     </div>
 
 </template>
@@ -15,12 +24,21 @@
 import { defineComponent, computed } from 'vue';
 import { store } from '@/store';
 import Card from '../components/Card.vue'
+import ModalUser from '../components/ModalUser.vue'
 
 export default defineComponent({
     name: 'PageUserList',
 
+    data () {
+        return {
+            showModal: false,
+            userSelected: ""
+        }
+    },
+
     components: {
-        Card
+        Card,
+        ModalUser
     },
 
     setup() {
@@ -28,11 +46,6 @@ export default defineComponent({
             dataInput: computed(() => store.state.dataInput),
             usersData: computed(() => store.state.usersData),
         }
-    },
-
-    created () {
-        console.log(this.dataInput)
-        console.log(this.usersData)
     }
 
 })
