@@ -16,7 +16,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'ModalComponent',
+    name: 'ModalError',
 
     props: {
         showModal: { type: Boolean }
