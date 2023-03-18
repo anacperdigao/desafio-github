@@ -117,14 +117,16 @@ export default defineComponent({
 .profile{
     display: flex;
     flex-direction: column;
-    background-color: aqua;
     height: 100%;
+    background-color: #e4e3e3;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
 }
 
 .avatar{
-    width: 150px;
-    height: 150px;
-    border-radius: 5px 0 0 0px;
+    width: 160px;
+    height: 160px;
+    border-radius: 5px;
 }
 
 .info{
